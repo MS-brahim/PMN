@@ -8,7 +8,7 @@ class Product extends connect {
         parent::__construct();
     }
 
-    public function select6()
+    public function select()
     {
         $sql = "SELECT * FROM products";
         $array = array();
@@ -17,5 +17,11 @@ class Product extends connect {
             $array[] = $row;
         }
         return $array;
-    }    
+    }
+    public function showProdById($id)
+    {
+        $sql = "SELECT * FROM products WHERE id ='$id'";
+        $data = mysqli_query($this->connection,$sql);
+        return $data;
+    }   
 }

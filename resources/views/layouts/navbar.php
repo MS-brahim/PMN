@@ -27,22 +27,23 @@
                         <div class="btn-group dropleft">
                             <a type="button" id="cartDropdown" class="nav-link dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                Panier
                                 <span class="badge badge-danger">
-                            <?php 
-                            session_start();
-                            if (!isset($_SESSION['carts']) || (trim($_SESSION['carts'])=='')) {
-                                echo '0';
-                            }else {
-                                echo $_SESSION['carts'];
-                             } ?> 
-                            </span>
+                                <?php 
+                                session_start();
+                                if (!isset($_SESSION['carts']) || (trim($_SESSION['carts'])=='')) {
+                                    echo '0';
+                                }else {
+                                    echo $_SESSION['carts'];
+                                } ?> 
+                                </span>
                             </a>
                             <div class="dropdown-menu">
                                 <?php 
                                     if (@$_SESSION['carts']> 0) {
                                         echo '<a class="dropdown-item" href="cart.php">voir tout</a>';
                                     }else{
-                                        echo '<a class="dropdown-item href="#">aucun article trouvé dans le panier</a>';
+                                        echo '<p class="p-2">aucun article trouvé dans le panier</p>';
                                     }
                                 ?>
                             </div>

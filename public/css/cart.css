@@ -1,7 +1,7 @@
 #cartDropdown .badge {
   position: absolute;
-  top: -1px;
-  right:5px;
+  top: -2px;
+  right:55px;
   font-size:12px;
   border-radius: 50%;
   background: red;

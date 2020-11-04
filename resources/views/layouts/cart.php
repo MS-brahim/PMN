@@ -24,48 +24,54 @@
         </div>
     </nav>
     <section class="container my-5">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th width="200">image</th>
-                <th >produits</th>
-                <th >price</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php 
-            include_once "../../../app/model/cart.php";
-            $cart = new Cart();
-            $idCart =  38;
-            $cartId = $cart->showCart($idCart);
-
-            foreach ($cartId as $cartRow){ ?>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td><img src="../../../public/images/products/<?php echo $cartRow['image'] ?>" class="img-fluid " width="200"></td>
-                    <td><?php echo $cartRow['title'] . $cartRow['id'];  ?>
-                        <p><?php echo $cartRow['discription'] ?></p>
-                    </td>
-                    <td width="370"><?php echo $cartRow['price'] ?> <br>
-                        <div class="d-flex align-items-end">
-                            <div class="p-3">
-                                <a href="" class=""> view <i class="fa fa-eye" aria-hidden="true"></i></a>
-                            </div>
-                            <div class="p-3">
-                                <a href=""> edit <i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="p-3">
-                                <a href=""> supprimer <i class="fa fa-trash" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </td>
+                    <th width="200">image</th>
+                    <th >produits</th>
+                    <th >price</th>
                 </tr>
-           <?php }
+            </thead>
+            <tbody>
+            <?php 
+                include_once "../../../app/model/cart.php";
+                $cart = new Cart();
+                $idCart =  38;
+                $cartId = $cart->showCart($idCart);
 
-        ?>
-            
-        </tbody>
-    </table>
-        
+                foreach ($cartId as $cartRow){ ?>
+                    <tr>
+                        <td><img src="../../../public/images/products/<?php echo $cartRow['image'] ?>" class="img-fluid " width="200"></td>
+                        <td><?php echo $cartRow['title'] . $cartRow['id'];  ?>
+                            <p><?php echo $cartRow['discription'] ?></p>
+                        </td>
+                        <td width="370"><?php echo $cartRow['price'] ?> <br>
+                            <div class="d-flex align-items-end ">
+                                <div class="p-3">
+                                    <a href="" class="text-warning"> view <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="p-3">
+                                    <a href=""> edit <i class="fas fa-edit"></i></a>
+                                </div>
+                                <div class="p-3">
+                                    <a href="" class="text-danger">supprimer <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+            <?php }
+
+            ?>
+                
+            </tbody>
+        </table>
+    </div>
+        <div class="my-2">
+            <b>TOTAL :  Dhs</b><br>
+        </div>
+        <button type="button" class="btn btn-warning text-white mt-2"><b>FINALISER VOTRE COMMANDE</b> </button>
+        <a type="button" href="../index.php" class="btn btn-light mt-2">POURSUIVRE VOS ACHATS</a>
     </section>
     <!-- Optional JavaScript -->
     <!-- font awsome  -->

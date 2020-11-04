@@ -68,11 +68,11 @@
           <?php 
           include_once "../../../app/model/product.php";
           $products = new Product();
-          $resault = $products->select6();
+          $resault = $products->select();
           foreach($resault as $row){?>
           <div class="col-md-3 mb-5">
               <form class="card text-left" method="POST" action="../../../app/controller/addToCartController.php?id=<?php echo $row['id'];?>">
-                  <a href="#">
+                  <a href="product.php?id=<?php echo $row['id'];?>">
                     <img class="card-img-top" src="../../../public/images/products/<?php echo $row['image'];?>" alt="">
                   </a>
                   <div class="card-body">
