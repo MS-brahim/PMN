@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['user'])){
+  header('location:../');
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,9 +11,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../public/css/bootstrap.min.css">
   </head>
   <body>
     <section class="container mt-5">
@@ -16,7 +21,6 @@
           <form class="card-body" method="POST" action="../../../app/controller/registerController.php">
             <h4 class="card-title"><center>Créer un nouveau compte</center></h4>
             <?php
-              session_start();
               if(isset($_SESSION['message'])){
             ?>
                 <div class="alert alert-danger text-center">
@@ -26,40 +30,70 @@
               unset($_SESSION['message']);
               }
             ?>
-            <div class="form-group">
-              <label for="">Nom</label>
-              <input type="text" name="firstname" id="" class="form-control" placeholder="" aria-describedby="helpId">
-              <small id="helpId" class="text-muted"></small>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                  <label for="">Nom</label>
+                  <input type="text" name="firstname" id="" class="form-control" placeholder="votre nom" aria-describedby="helpId">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="">Prénom</label>
+                  <input type="text" name="lastname" id="" class="form-control" placeholder="votre prenom" aria-describedby="helpId">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="" class="form-control" placeholder="exemple@gmail.com">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="phone">Téléphone</label>
+                  <input type="tel" name="phone" id="" class="form-control" placeholder="+212 X XX XX XX XX">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="password">Mot de passe</label>
+                  <input type="password" name="password" id="" class="form-control" placeholder="***********">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="password">Retaper votre mot de passe</label>
+                  <input type="password" name="pwd" id="" class="form-control" placeholder="***********">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-12 form-group">
+                  <label for="password">Votre adresse actuel</label>
+                  <textarea  name="address" id="" class="form-control" placeholder=""></textarea>
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-4 form-group">
+                  <label for="">Pays</label>
+                  <input type="text" name="country" id="" class="form-control" placeholder="votre pays" aria-describedby="helpId">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-4 form-group">
+                  <label for="">ville</label>
+                  <input type="text" name="city" id="" class="form-control" placeholder="votre ville actuel" aria-describedby="helpId">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+                <div class="col-sm-4 form-group">
+                  <label for="">zipCode</label>
+                  <input type="text" name="zipcode" id="" class="form-control" placeholder="EX: 46000" aria-describedby="helpId">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="">Prénom</label>
-              <input type="text" name="lastname" id="" class="form-control" placeholder="" aria-describedby="helpId">
-              <small id="helpId" class="text-muted"></small>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" name="email" id="" class="form-control" placeholder="exemple@gmail.com">
-              <small id="helpId" class="text-muted"></small>
-            </div>
-            <div class="form-group">
-              <label for="password">Mot de passe</label>
-              <input type="password" name="password" id="" class="form-control" placeholder="***********">
-              <small id="helpId" class="text-muted"></small>
-            </div>
-            <div class="form-group">
-              <label for="password">Retaper votre mot de passe</label>
-              <input type="password" name="pwd" id="" class="form-control" placeholder="***********">
-              <small id="helpId" class="text-muted"></small>
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary form-control">Connection</button>
-            <p class="mt-5">Vous avez déjà un compte?  <a href="login.php">s'identifier</a>.</p>
+            <center>
+            <button type="submit" name="submit" class="btn btn-primary col-3 mt-3 form-control">Créer un compte</button>
+            <p class="mt-5">Vous avez déjà un compte?  <a href="login.php">s'identifier</a>.</p></center>
           </form>
         </div>
     </section>
+
+    
+    <!-- font awsome  -->
+    <script src="https://kit.fontawesome.com/8f45faa16b.js" crossorigin="anonymous"></script>
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <script src="../../../public/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../../../public/js/popper.min.js"></script>
+    <script src="../../../public/js/bootstrap.min.js"></script>  </body>
 </html>

@@ -1,14 +1,12 @@
 <?php
-session_start();
 include_once "../model/cart.php";
 $cart = new Cart();
 if (isset($_POST['addToCart'])) {
-    
+    $qty = $_POST['qty'];
     $Pid = $_GET['id'];
-    $addToCart = $cart->addToCart($Pid);
-    if ($addToCart == true) {
-        $_SESSION['carts'] = $addToCart;
-        header("location: ../../resources/views/layouts/home.php");
+    $orderID = $cart->addToCart($Pid,$qty);
+    if ($orderID) {
+        header("location: ../../resources/views/layouts/cart.php?idcart=".$orderID."");
     }
-        
+
 }

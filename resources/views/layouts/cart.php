@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Products</title>
+    <title>Panier</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,46 +31,37 @@
                     <th width="200">image</th>
                     <th >produits</th>
                     <th >price</th>
+                    <th>Quantité</th>
+                    <th><i class="fa fa-trash" aria-hidden="true"></i></th>
                 </tr>
             </thead>
             <tbody>
             <?php 
-                include_once "../../../app/model/cart.php";
-                $cart = new Cart();
-                $idCart =  38;
+                @$idCart = $_GET['idcart'];
+                if ($idCart=='' ) {
+                    echo "<h5 class='text-danger'> aucun article trouvé dans le panier </h5>";
+                }else{
                 $cartId = $cart->showCart($idCart);
-
                 foreach ($cartId as $cartRow){ ?>
                     <tr>
                         <td><img src="../../../public/images/products/<?php echo $cartRow['image'] ?>" class="img-fluid " width="200"></td>
-                        <td><?php echo $cartRow['title'] . $cartRow['id'];  ?>
-                            <p><?php echo $cartRow['discription'] ?></p>
+                        <td><?php echo $cartRow['title'] ?>
+                            <p><?php echo $cartRow['description'] ?></p>
                         </td>
-                        <td width="370"><?php echo $cartRow['price'] ?> <br>
-                            <div class="d-flex align-items-end ">
-                                <div class="p-3">
-                                    <a href="" class="text-warning"> view <i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-                                <div class="p-3">
-                                    <a href=""> edit <i class="fas fa-edit"></i></a>
-                                </div>
-                                <div class="p-3">
-                                    <a href="" class="text-danger">supprimer <i class="fa fa-trash" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
+                        <td><?php echo $cartRow['price'] ?>  Dhs<br></td>
+                        <td width="100"><?php echo $cartRow['qty'] ?></td>
+                        <td>
+                            <a href="../../../app/controller/cartDelete.php?D_cart=<?php echo $idCart ?>" class="text-danger"><i class="fas fa-times-circle"></i></a>
                         </td>
                     </tr>
-            <?php }
-
-            ?>
-                
+                <?php }  } ?>                
             </tbody>
         </table>
     </div>
         <div class="my-2">
-            <b>TOTAL :  Dhs</b><br>
+            <b>TOTAL :  <?php echo $cartRow['price']*$cartRow['qty'] ?> Dhs</b><br>
         </div>
-        <button type="button" class="btn btn-warning text-white mt-2"><b>FINALISER VOTRE COMMANDE</b> </button>
+        <a type="button" href="confirmerCommand.php?idcart=<?php echo $idCart ?>" class="btn btn-warning text-white mt-2"><b>FINALISER VOTRE COMMANDE</b> </a>
         <a type="button" href="../index.php" class="btn btn-light mt-2">POURSUIVRE VOS ACHATS</a>
     </section>
     <!-- Optional JavaScript -->

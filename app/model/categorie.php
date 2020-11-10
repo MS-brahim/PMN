@@ -9,11 +9,15 @@ class Categorie extends connect
     public function select($table)
     {
         $sql = "SELECT * FROM ".$table;
-        $array = array();
         $query = mysqli_query($this->connection,$sql);
-        while($row = mysqli_fetch_assoc($query)){
-            $array[] = $row;
-        }
-        return $array;
+        return $query;
+    }
+    public function search($catName)
+    {
+        $sql = "SELECT * FROM categories C
+        INNER JOIN products P ON P.categorie_id = C.id
+        WHERE C.name = '$catName'";
+        $query = mysqli_query($this->connection,$sql);
+        return $query;
     }
 }

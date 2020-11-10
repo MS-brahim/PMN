@@ -18,9 +18,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Dashboard</h1>
+                        <h1 class="mt-4">Tableau de bord</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Tableau de bord</li>
                         </ol>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
@@ -60,63 +60,49 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area mr-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar mr-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                DataTable Example
+                                orders
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>produit</th>
+                                                <th>quantité</th>
+                                                <th>adresse client</th>
+                                                <th>pays</th>
+                                                <th>ville</th>
+                                                <th>date de commande</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>produit</th>
+                                                <th>quantité</th>
+                                                <th>adresse client</th>
+                                                <th>pays</th>
+                                                <th>ville</th>
+                                                <th>date de commande</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
+                                        <?php 
+                                            include_once "../../../app/model/order.php";
+                                            $categorie = new Order();
+                                            $resault = $categorie->select();
+                                            foreach($resault as $row){?>
                                             <tr>
-                                                <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>27</td>
-                                                <td>2011/01/25</td>
-                                                <td>$112,000</td>
+                                                <td><?php echo $row['title'] ?></td>
+                                                <td><?php echo $row['qty'] ?></td>
+                                                <td><?php echo $row['address'] ?></td>
+                                                <td><?php echo $row['country'] ?></td>
+                                                <td><?php echo $row['city'] ?></td>
+                                                <td><?php echo $row['createOrder_at'] ?></td>
                                             </tr>
+                                        <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -140,13 +126,14 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="../../../public/js/chart-area-demo.js"></script>
-        <script src="../../../public/js/chart-bar-demo.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        <script src="../../../public/js/datatables-demo.js"></script>
         <script src="https://kit.fontawesome.com/8f45faa16b.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="../../../public/js/datatables-demo.js"></script>
+        <script src="../../../public/js/chart-area-demo.js"></script>
+        <script src="../../../public/js/chart-bar-demo.js"></script>
+        <script src="../../../public/js/scripts.js"></script>
         
     </body>
 </html>

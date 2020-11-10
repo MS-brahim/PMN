@@ -1,57 +1,59 @@
 <div class="container-fluid bg-dark" >
     <nav class="navbar navbar-expand-sm navbar-dark ">
-        <a class="navbar-brand" href="../index.php">Logo</a>
+        <a class="navbar-brand" href="../index.php">IMMOBILIERS</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <div class="row">
-                    <div class="col-6 text-right">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> &nbsp <i class="fa fa-user" aria-hidden="true"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="../auth/login.php">login </a>
-                            <a class="dropdown-item" href="../auth/register.php">register</a>
-                        </div>
-                    </div>
-                    <div class="col-6 ">
-                        <div class="btn-group dropleft">
-                            <a type="button" id="cartDropdown" class="nav-link dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                Panier
-                                <span class="badge badge-danger">
-                                <?php 
-                                session_start();
-                                if (!isset($_SESSION['carts']) || (trim($_SESSION['carts'])=='')) {
-                                    echo '0';
-                                }else {
-                                    echo $_SESSION['carts'];
-                                } ?> 
-                                </span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <?php 
-                                    if (@$_SESSION['carts']> 0) {
-                                        echo '<a class="dropdown-item" href="cart.php">voir tout</a>';
-                                    }else{
-                                        echo '<p class="p-2">aucun article trouvé dans le panier</p>';
-                                    }
-                                ?>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 w-100">
+                <li class="nav-item w-75 ml-4">
+                    <form class="nav-link" action="resaults.php" method="POST">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit" ><i class="fa fa-search text-white"></i></button>
                             </div>
                         </div>
-                    </div>
-                   
-                </div>
-            </form>
+                    </form> 
+                </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+                <?php 
+                include_once "../../../app/model/cart.php";
+                include_once "../../../app/model/user.php";
+                include_once "../../../app/model/product.php";
+                $showProduct = new Product();
+                $cart = new Cart();
+                $user = new User();
+                session_start();
+                @$sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
+                $rowU = $user->sessionUser($sql);
+                ?> 
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0 w-100">
+                    <?php if (isset($_SESSION['user'])) { ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $rowU['firstname']?> &nbsp<i class="fas fa-user fa-fw"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <?php if ($rowU['role']==1) { ?>
+                                    <a class="dropdown-item" href="../admin/dashboard.php">Dashboard</a>
+                                    <a class="dropdown-item" href="../../../app/controller/logout.php">Déconncter</a>
+                                <?php } 
+                                else {?>
+                                    <a class="dropdown-item" href="../../../app/controller/logout.php">Déconncter</a>
+                                <?php } ?>
+                            </div>
+                        </li>
+                    <?php } else {?>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white" href="../auth/login.php">Connecter </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white" href="../auth/register.php">S'inscrire</a>
+                        </li>
+                    <?php }?>
+                </ul>
+            </div>
         </div>
     </nav>
 </div>

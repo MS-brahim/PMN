@@ -6,11 +6,12 @@ class Cart extends connect
     {
         parent::__construct();
     }
-    public function addToCart($Pid)
+    public function addToCart($Pid, $qty)
     {
-        $sql = "INSERT INTO orders (product_id) VALUES ($Pid)";
+        $sql = "INSERT INTO orders (product_id, qty) VALUES ($Pid, $qty)";
         mysqli_query($this->connection,$sql);
-        return true;
+        $orderID = $this->connection->insert_id;
+        return $orderID;
     }
     public function showCart($idCart)
     {
@@ -24,5 +25,15 @@ class Cart extends connect
             $array[] = $row;
         }
         return $array;
+    }
+    // method delete cart 
+    public function delete($id){
+        $sql = "DELETE FROM orders WHERE id = '$id'";
+        $resault = mysqli_query($this->connection, $sql);
+        if($resault){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

@@ -17,10 +17,10 @@ CREATE TABLE products (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     image VARCHAR(255) NOT NULL,
-    image1 VARCHAR(255) NOT NULL,
-    image2 VARCHAR(255) NOT NULL,
-    image3 VARCHAR(255) NOT NULL,
-    discription VARCHAR(50) NOT NULL,
+    image1 VARCHAR(255) NULL,
+    image2 VARCHAR(255) NULL,
+    image3 VARCHAR(255) NULL,
+    description VARCHAR(50) NOT NULL,
     price double NOT NULL,
     oldPrice double NOT NULL,
     stock INT(11) NOT NULL,
@@ -35,11 +35,12 @@ CREATE TABLE categories (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
-CREATE TABLE orders (
+CREATE TABLE IF NOT EXISTS orders (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT(11) NULL,
     product_id INT(11) NOT NULL,
     status INT(11) NOT NULL DEFAULT 0,
+    qty INT(11),
     create_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     update_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id),

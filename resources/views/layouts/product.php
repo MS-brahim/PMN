@@ -24,14 +24,10 @@
         </div>
     </nav>
     <?php 
-    include_once "../../../app/model/product.php";
-    $p = new Product();
-
     $id = $_GET['id'];
-    $rows = mysqli_fetch_assoc($p->showProdById($id));
-
+    $rows = mysqli_fetch_assoc($showProduct->showProdById($id));
     ?>
-    <div class="container-fluid">
+    <form class="container-fluid" method="POST" action="../../../app/controller/addToCartController.php?id=<?php echo $rows['id'];?>">
         <h1 class="text-center p-3 mt-5 bg-light "><b><?php echo $rows['title']?> </b></h1>
         <div class="row mt-3">
             <div class="col-sm-6">
@@ -53,6 +49,7 @@
                     </div>
                 </div>
                 <div class="my-3">
+                    <p><b><?php echo $rows['title']?></b></p>
                     <h3><b><?php echo $rows['price']?> Dhs</b></h3>
                     <h3 class="text-secondary"><b><del><?php echo $rows['oldPrice']?> Dhs</del></b></h3>
                     <p></p>
@@ -61,7 +58,7 @@
                         <?php  if($rows['stock'] >=1){ 
                         echo '
                         <div class="col-2">
-                            <input type="number" name="product_qty" class="w-100" value="1" min="1" max="10">
+                            <input type="number" name="qty" class="w-100" value="1" min="1" max="'.$rows['stock'].'">
                         </div>
                         <div class="col-6">
                             <h5 class="text-success"><b>En Stock</b></h5>
@@ -77,7 +74,7 @@
                         <?php }?>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-warning">Ajouter au panier</button>
+                        <button type="submit" name="addToCart" class="btn btn-warning">Ajouter au panier</button>
                     </div>
                 </div>
             </div>
@@ -86,18 +83,18 @@
         <h2 class="bg-light p-3">Description</h2>
             <div class="mt-4 ml-2">
                 <p><b><?php echo $rows['title']?></b></p>
-                <p><?php echo $rows['discription']?></p>
+                <p><?php echo $rows['description']?></p>
             </div>           
         </div>
-      </div>
+    </form>
     <!-- Optional JavaScript -->
     <!-- font awsome  -->
     <script>
-function slideShow(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  expandImg.src = imgs.src;
-}
-</script>
+    function slideShow(imgs) {
+    var expandImg = document.getElementById("expandedImg");
+    expandImg.src = imgs.src;
+    }
+    </script>
     <script src="https://kit.fontawesome.com/8f45faa16b.js" crossorigin="anonymous"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../../../public/js/jquery-3.3.1.slim.min.js"></script>
